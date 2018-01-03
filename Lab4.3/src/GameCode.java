@@ -26,6 +26,7 @@ public class GameCode extends Application
         btn.setText("Click Me!");
         btn.setLayoutX(350);
         btn.setLayoutY(350);
+        btn.setStyle("-fx-background-color: dodgerblue; -fx-padding:25; -fx-font-size:18;");
                
         btn.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -35,8 +36,8 @@ public class GameCode extends Application
             @Override
             public void handle(ActionEvent event) 
             {
-            	randomX = 0 + (int)(Math.random() * 735);
-            	randomY = 0 + (int)(Math.random() * 775);
+            	randomX = 0 + (int)(Math.random() * 705);
+            	randomY = 0 + (int)(Math.random() * 750);
             	btn.setLayoutX(randomX);
                 btn.setLayoutY(randomY);
                 score++;
