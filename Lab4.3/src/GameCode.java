@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
@@ -25,7 +26,6 @@ public class GameCode extends Application
 	@Override
 	public void start(Stage primaryStage) 
 	{
-
         primaryStage.setTitle("Wack-a-Button");
         Button btn = new Button();
         btn.setText("Click Me!");
@@ -49,13 +49,15 @@ public class GameCode extends Application
                 score++;
                 kScore = "Score: " + score;
                 text.setText(kScore);
+                text.setFill(Color.WHITE);
             }
         });
         
         Pane root = new Pane();
         root.getChildren().add(btn);
+        root.setStyle("-fx-background-color: transparent;");
+        primaryStage.setScene(new Scene(root, 800, 800, Color.BLACK));
         root.getChildren().add(text);
-        primaryStage.setScene(new Scene(root, 800, 800));
         primaryStage.show();
     }
 
