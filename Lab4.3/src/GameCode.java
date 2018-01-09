@@ -16,7 +16,7 @@ public class GameCode extends Application
 {
 	public int score;
 	public String kScore;
-	public String time;
+	public long starttime;
 	
 	public static void main(String[] args) 
 	{
@@ -50,9 +50,13 @@ public class GameCode extends Application
                 kScore = "Score: " + score;
                 text.setText(kScore);
                 text.setFill(Color.WHITE);
+                starttime = System.nanoTime();
+                //if (starttime > 1000000000)
+                {
+                	//btn.setDisable(true);
+                }
             }
         });
-        
         Pane root = new Pane();
         root.getChildren().add(btn);
         root.setStyle("-fx-background-color: transparent;");
