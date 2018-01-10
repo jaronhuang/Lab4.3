@@ -1,5 +1,4 @@
-import javafx.animation.KeyFrame;
-import javafx.animation.Timeline;
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,9 +13,11 @@ import javafx.stage.Stage;
 
 public class GameCode extends Application
 {
-	public int score;
-	public String kScore;
-	public long starttime;
+	private int score;
+	private String kScore;
+	private String kTime;
+	private long starttime;
+	private boolean isPressed = false;
 	
 	public static void main(String[] args) 
 	{
@@ -32,8 +33,10 @@ public class GameCode extends Application
         btn.setLayoutX(350);
         btn.setLayoutY(350); 
         btn.setStyle("-fx-background-color: gold; -fx-font-weight: bold; -fx-stroke: white; -fx-padding:15; -fx-font-size:18;");
-        Text text = new Text(706, 750, kScore);
+        Text text = new Text(702, 770, kScore);
+        Text tTime = new Text(702, 790, kTime);
         text.setFont(Font.font ("Arial", FontWeight.BOLD, 20));
+        tTime.setFont(Font.font ("Arial", FontWeight.BOLD, 20));
                
         btn.setOnAction(new EventHandler<ActionEvent>() 
         {
@@ -50,19 +53,38 @@ public class GameCode extends Application
                 kScore = "Score: " + score;
                 text.setText(kScore);
                 text.setFill(Color.WHITE);
-                starttime = System.nanoTime();
-                //if (starttime > 1000000000)
+                tTime.setFill(Color.WHITE);
+                if (!isPressed)
                 {
-                	//btn.setDisable(true);
+                	starttime = System.nanoTime();
+                	new AnimationTimer()
+                    {
+                    	public void handle(long now)
+                    	{
+                    		if (now - 10E9 > starttime)
+                    		{
+                    			btn.setDisable(true);
+                    		}
+                    		else
+                    		{
+                                kTime = "Time: " + String.valueOf(((now - starttime)/10E8));
+                    			tTime.setText(kTime);
+                    		}
+                    	}
+                    }.start();
                 }
+                isPressed = true;
             }
         });
+        
         Pane root = new Pane();
         root.getChildren().add(btn);
+        root.getChildren().add(tTime);
         root.setStyle("-fx-background-color: transparent;");
         primaryStage.setScene(new Scene(root, 800, 800, Color.BLACK));
         root.getChildren().add(text);
         primaryStage.show();
     }
-
 }
+
+
