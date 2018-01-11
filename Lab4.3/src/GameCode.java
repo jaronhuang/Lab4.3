@@ -1,3 +1,5 @@
+import java.util.Scanner;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -17,10 +19,14 @@ public class GameCode extends Application
 	private String kScore;
 	private String kTime;
 	private long starttime;
+	private static String name;
 	private boolean isPressed = false;
 	
 	public static void main(String[] args) 
 	{
+		System.out.println ("What is your name?");
+		Scanner in = new Scanner (System.in);
+		name = in.nextLine();
         launch(args);
     }
 
@@ -63,7 +69,10 @@ public class GameCode extends Application
                     	{
                     		if (now - 10E9 > starttime)
                     		{
+                    			this.stop();
                     			btn.setDisable(true);
+                    			BackEnd.writeCSV(name, score);
+                    			
                     		}
                     		else
                     		{

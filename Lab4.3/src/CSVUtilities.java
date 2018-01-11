@@ -33,10 +33,16 @@ public class CSVUtilities
 		{
 			ioe.printStackTrace();
 		}
-		
-		this.numColumns = getColumnHeaders().size();
 	}
 	
+	public ArrayList<String> getCSVData() {
+		return CSVData;
+	}
+
+	public void setCSVData(ArrayList<String> cSVData) {
+		CSVData = cSVData;
+	}
+
 	public List<String> getColumnHeaders()
 	{
 		return Arrays.asList(CSVData.get(0).split(","));
@@ -75,8 +81,4 @@ public class CSVUtilities
 		return data;
 	}
 	
-	/*public writeCSV(File file)
-	{
-		
-	}*/
 }
