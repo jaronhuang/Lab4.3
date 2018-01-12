@@ -1,3 +1,7 @@
+import java.io.File;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 import javafx.animation.AnimationTimer;
@@ -12,7 +16,11 @@ import javafx.scene.text.Font;
 import javafx.scene.text.FontWeight;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
-
+/**
+ * Lab 4.3 
+ * @author Jaron Huang
+ * 1/11/18
+ */
 public class GameCode extends Application
 {
 	private int score;
@@ -72,7 +80,26 @@ public class GameCode extends Application
                     			this.stop();
                     			btn.setDisable(true);
                     			BackEnd.writeCSV(name, score);
-                    			
+                    			System.out.println("High Scores");
+                    			File file = new File("highscores.csv");
+                    			List<String> sNames = new ArrayList<String>();
+                    			List<Integer> hScores = new ArrayList<Integer>();
+                    			CSVUtilities nCSV = null;
+                    			try 
+                    			{
+									nCSV = new CSVUtilities(file);
+								} 
+                    			catch (IOException e) 
+                    			{
+									// TODO Auto-generated catch block
+									e.printStackTrace();
+								}
+                    			sNames = nCSV.getDataString(0);
+                    			hScores = nCSV.getDataInteger(1);
+                    			for (int i = 0; i < sNames.size(); i++)
+                    			{
+                    				System.out.println(i + 1 + ". " + sNames.get(i) + "  " + hScores.get(i));
+                    			}
                     		}
                     		else
                     		{

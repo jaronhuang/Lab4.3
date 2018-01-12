@@ -10,7 +10,11 @@ import java.nio.file.Path;
 import java.nio.file.Paths; 
 import java.util.ArrayList; 
 import java.util.List;
-
+/**
+ * Lab 4.3 
+ * @author Jaron Huang
+ * 1/11/18
+ */
 public class BackEnd 
 {
 	static File file = new File("highscores.csv");
@@ -32,16 +36,26 @@ public class BackEnd
 		List<Integer> scorez = csv.getDataInteger(1);
 		for (int i = 0; i < scorez.size(); i++)
 		{
-			if (scorez.get(i) < score)
+			if (scorez.get(i) < score && i == 0)
 			{
-				line = i + 1;
+				line = 1; break;
+			}
+			else if (scorez.get(i) < score)
+			{
+				line = i + 1; break;
+			}
+			else if (i == scorez.size() - 1)
+			{
+				line = scorez.size() + 1;
 			}
 		}
 		csv.getCSVData().add(line, name + "," + score);
 		FileWriter pw = null;
-		try {
+		try 
+		{
 			Files.write(Paths.get("highscores.csv"), csv.getCSVData());
-		} catch (IOException e) {
+		} 
+		catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
